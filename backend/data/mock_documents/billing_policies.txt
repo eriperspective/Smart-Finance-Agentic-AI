@@ -1,0 +1,94 @@
+SMARTFINANCE AI - BILLING POLICIES AND FEE SCHEDULE
+
+ACCOUNT MAINTENANCE FEES
+Standard Checking Account: $0 monthly fee with minimum balance of $500
+Premium Checking Account: $15 monthly fee (waived with $2,500 balance)
+Savings Account: $0 monthly fee for all balances
+Business Account: $25 monthly fee (waived with $5,000 balance)
+
+TRANSACTION FEES
+Domestic Wire Transfer: $25 outgoing, $0 incoming
+International Wire Transfer: $45 outgoing, $15 incoming
+ACH Transfer: $0 for all transfers
+Paper Check: $0.50 per check
+Stop Payment Fee: $30 per request
+
+ATM AND DEBIT CARD FEES
+SmartFinance ATM: $0 per transaction
+Out-of-Network ATM: $2.50 per transaction
+International ATM Withdrawal: $5.00 per transaction
+ATM Balance Inquiry: $1.00 at non-SmartFinance ATMs
+Card Replacement Fee: $10 for standard delivery, $25 for expedited
+
+OVERDRAFT AND NSF FEES
+Overdraft Fee: $35 per occurrence (maximum 3 per day)
+NSF (Non-Sufficient Funds) Fee: $35 per returned item
+Overdraft Protection Transfer: $10 per transfer from savings
+
+INTEREST RATES (Current as of October 2025)
+Standard Savings Account APY: 0.05%
+High-Yield Savings Account APY: 4.25% (requires $10,000 minimum)
+Standard Checking Interest: 0.01% on balances over $1,000
+Certificate of Deposit (12-month): 5.00% APY
+Certificate of Deposit (24-month): 4.75% APY
+
+CREDIT AND LOAN RATES
+Personal Loan APR: 7.99% - 24.99% (based on creditworthiness)
+Auto Loan APR: 5.49% - 18.99%
+Home Equity Line of Credit: Prime + 0.5% (currently 8.50%)
+Credit Card APR: 16.99% - 26.99% variable rate
+
+REFUND POLICIES
+Disputed Transaction Refund: Processed within 10 business days of resolution
+Incorrectly Charged Fee Refund: Immediate reversal upon verification
+Unauthorized Transaction: Zero liability after reporting within 60 days
+Annual Fee Refund: Prorated refund if account closed within 90 days
+
+FOREIGN TRANSACTION FEES
+Standard Account: 3% of transaction amount
+Premium Account: 1% of transaction amount
+Currency Conversion: Mid-market rate + 1% markup
+
+REWARDS PROGRAM FEES
+Annual Rewards Card Fee: $95 (waived first year)
+Additional Cardholder Fee: $50 per year
+Balance Transfer Fee: 3% of amount transferred (minimum $10)
+Cash Advance Fee: $10 or 5% of amount, whichever is greater
+
+SPECIAL SERVICE FEES
+Notary Service: $10 per signature
+Cashier's Check: $10 per check
+Money Order: $5 per order
+Account Research: $25 per hour
+Statement Copy: $5 per statement (older than 12 months)
+
+MERCHANT PAYMENT PROCESSING (Business Accounts)
+Card Present Transaction: 2.6% + $0.10
+Card Not Present Transaction: 2.9% + $0.30
+Monthly Statement Fee: $0 (paperless), $10 (paper)
+Chargeback Fee: $15 per occurrence
+
+EARLY ACCOUNT CLOSURE FEE
+Accounts closed within 90 days of opening: $25 fee
+Accounts closed within 180 days: $10 fee
+After 180 days: No fee
+
+MINIMUM BALANCE REQUIREMENTS
+To avoid monthly fees:
+- Standard Checking: $500 daily balance
+- Premium Checking: $2,500 daily balance
+- Savings Account: No minimum
+- Business Account: $5,000 daily balance
+
+INTEREST CALCULATION METHODS
+Interest is calculated using the daily balance method
+Interest is compounded daily
+Interest is credited monthly on the last business day
+Minimum balance to earn interest: $0.01
+
+FEE WAIVER PROGRAMS
+Students (ages 18-24): All account fees waived with valid student ID
+Military Service Members: Monthly fees waived with military ID
+Senior Citizens (65+): $5 monthly discount on all accounts
+Direct Deposit Customers: ATM fee reimbursement up to $10/month
+

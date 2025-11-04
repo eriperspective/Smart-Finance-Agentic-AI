@@ -1,0 +1,210 @@
+SMARTFINANCE AI - TECHNICAL SUPPORT FAQS AND TROUBLESHOOTING
+
+LOGIN ISSUES
+
+Q: I forgot my password. How do I reset it?
+A: Click "Forgot Password" on the login screen. Enter your email address and we'll send a reset link. The link expires in 30 minutes. Create a password with at least 8 characters, including uppercase, lowercase, numbers, and symbols.
+
+Q: My account is locked. What should I do?
+A: Accounts lock automatically after 5 failed login attempts. Wait 30 minutes for automatic unlock, or click "Unlock Account" to verify your identity via email or SMS code.
+
+Q: I'm not receiving the verification code.
+A: Check your spam folder. Codes expire after 10 minutes. Ensure your phone number is correct in Settings > Profile. Try requesting a new code. If issues persist, contact support for manual verification.
+
+Q: Two-factor authentication isn't working.
+A: Ensure your device clock is synced correctly. Try regenerating authentication codes in Settings > Security > 2FA. Keep backup codes in a safe place. You can temporarily disable 2FA by verifying your identity via email.
+
+MOBILE APP ISSUES
+
+Q: The app keeps crashing on startup.
+A: Try these steps in order:
+1. Force close the app completely
+2. Clear app cache (Settings > Apps > SmartFinance > Clear Cache)
+3. Ensure you have the latest version from app store
+4. Restart your device
+5. Uninstall and reinstall the app
+Your data is stored securely and will sync after reinstallation.
+
+Q: Transactions aren't showing up in real-time.
+A: Pull down on the transaction screen to refresh. Check your internet connection. Some merchant transactions take 1-3 business days to post. Pending transactions show in a separate section. Clear cache if transactions are missing after 24 hours.
+
+Q: The app is running slowly.
+A: Performance tips:
+- Close other apps running in background
+- Clear app cache weekly
+- Ensure OS is up to date
+- Minimum requirements: iOS 14+ or Android 10+
+- Free up device storage (app needs 100MB minimum)
+- Disable animations in Settings > Accessibility > Reduce Motion
+
+Q: Face ID or fingerprint login stopped working.
+A: Re-enable biometric login:
+1. Go to Settings > Security > Biometric Login
+2. Toggle off, then on
+3. Re-authenticate with password
+4. Re-scan fingerprint or face
+Ensure your device biometrics are set up in phone settings.
+
+ACCOUNT ACCESS ISSUES
+
+Q: I can't see my account balance.
+A: This usually indicates a sync issue:
+1. Pull to refresh the screen
+2. Log out and log back in
+3. Check if you're connected to internet
+4. Clear app cache
+5. Update to latest app version
+Balance should appear within 60 seconds.
+
+Q: My recent deposit isn't showing.
+A: Check deposit timeline:
+- Mobile check deposit: Available in 1-2 business days
+- Direct deposit: Available same day if before 8 PM EST
+- Wire transfer: Within 1 business day
+- ACH transfer: 2-3 business days
+Check "Pending Deposits" section for status.
+
+Q: I'm seeing an "Account Restricted" message.
+A: Account restrictions occur for:
+- Suspicious activity detected (fraud prevention)
+- Incomplete KYC verification
+- Outstanding negative balance
+- Terms of service violation
+Contact support immediately with your account number for resolution.
+
+TRANSFER AND PAYMENT ISSUES
+
+Q: My transfer failed. Why?
+A: Common reasons:
+- Insufficient funds
+- Daily transfer limit exceeded ($5,000 for standard accounts)
+- Recipient account information incorrect
+- Network timeout (try again)
+- Account on hold for security review
+Check transaction history for specific error code.
+
+Q: How do I increase my transfer limit?
+A: Daily limits:
+- Standard: $5,000
+- Premium: $25,000
+- Business: $100,000
+Request temporary increase: Settings > Account > Request Limit Increase
+Permanent increase requires account review (5-7 business days).
+
+Q: Bill payment didn't process.
+A: Verify:
+- Payee information is correct
+- Account has sufficient funds
+- Payment scheduled for future date hasn't arrived yet
+- Payment method is active (not expired)
+Bill payments process next business day if scheduled before 5 PM EST.
+
+MOBILE DEPOSIT ISSUES
+
+Q: Check deposit was rejected. Why?
+A: Rejection reasons:
+- Check image too blurry (retake in good lighting)
+- Check amount exceeds daily limit ($3,000)
+- Check already deposited (duplicate)
+- Check is more than 6 months old
+- Signature missing or doesn't match
+Write "VOID" on rejected checks to prevent duplicate deposits.
+
+Q: How do I take a clear check photo?
+A: Best practices:
+- Use plain dark background
+- Ensure all four corners visible
+- Avoid shadows and glare
+- Hold phone directly above check
+- Keep check flat and unwrinkled
+- Good lighting (natural light best)
+
+SECURITY AND PRIVACY
+
+Q: I see transactions I didn't make.
+A: Immediate action required:
+1. Lock your card immediately (Settings > Cards > Lock Card)
+2. Report fraud in app: Support > Report Fraud
+3. Review all recent transactions
+4. Change your password
+5. Enable 2FA if not active
+We have zero liability for reported unauthorized transactions.
+
+Q: How do I enable security alerts?
+A: Configure alerts:
+Settings > Notifications > Transaction Alerts
+Options:
+- All transactions
+- Transactions over $X amount
+- International transactions
+- Online purchases
+- ATM withdrawals
+Receive via push notification, email, or SMS.
+
+Q: Someone has my login information. What do I do?
+A: Emergency security steps:
+1. Change password immediately
+2. Log out all devices (Settings > Security > Active Sessions > Log Out All)
+3. Enable 2FA
+4. Review recent account activity
+5. Lock all cards temporarily
+6. Contact support for security review
+
+COMMON ERROR CODES
+
+Error 1001: Network connection lost - Check internet and retry
+Error 1002: Session expired - Log in again
+Error 1003: Invalid credentials - Reset password
+Error 2001: Insufficient funds - Add funds to account
+Error 2002: Daily limit exceeded - Wait 24 hours or request increase
+Error 3001: Temporary account hold - Contact support
+Error 3002: Card declined - Check with merchant or contact support
+Error 4001: Server maintenance - Try again in 15 minutes
+Error 5001: Device not recognized - Verify via email
+
+CONNECTIVITY ISSUES
+
+Q: App says "Unable to connect to server."
+A: Troubleshooting:
+1. Check internet connection (WiFi or mobile data)
+2. Try switching between WiFi and mobile data
+3. Disable VPN temporarily
+4. Check our status page: status.smartfinanceai.com
+5. Wait 5 minutes and retry
+If server maintenance, you'll see notification in app.
+
+Q: Can I use the app on multiple devices?
+A: Yes, log in on up to 5 devices simultaneously. Each device requires one-time verification. Manage active devices: Settings > Security > Active Devices. Remove old devices to free up slots.
+
+APP FEATURES
+
+Q: How do I set up automatic savings?
+A: Set up auto-save:
+1. Go to Savings tab
+2. Tap "Auto-Save" button
+3. Choose frequency (daily/weekly/monthly)
+4. Set amount
+5. Select source account
+6. Confirm
+Transfers occur at 6 AM EST on scheduled days.
+
+Q: How do I track my rewards points?
+A: View rewards:
+- Profile tab > Rewards
+- See current points balance
+- View tier level (Silver/Gold/Platinum)
+- Track progress to next tier
+- See available redemptions
+Points updated in real-time after each transaction.
+
+Q: Where can I see my spending analytics?
+A: Access analytics:
+Dashboard > Spending Insights
+Features:
+- Category breakdown
+- Monthly trends
+- Comparison to previous months
+- Budget tracking
+- Largest expenses
+Updates daily at midnight EST.
+

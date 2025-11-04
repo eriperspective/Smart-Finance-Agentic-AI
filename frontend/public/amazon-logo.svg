@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 250">
+  <!-- Letter 'a' -->
+  <text x="110" y="145" font-family="Arial, sans-serif" font-size="165" font-weight="bold" fill="white" text-anchor="middle">a</text>
+  
+  <!-- Smile arrow curve from A to Z -->
+  <path d="M 20 180 Q 110 225 165 180" 
+        stroke="white" 
+        stroke-width="12" 
+        fill="none" 
+        stroke-linecap="round"/>
+  
+  <!-- Arrow tip - chevron > shape -->
+  <path d="M 165 165 L 190 180 L 165 195" 
+        stroke="white" 
+        stroke-width="12" 
+        fill="none" 
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>

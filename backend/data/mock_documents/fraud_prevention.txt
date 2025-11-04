@@ -1,0 +1,349 @@
+SMARTFINANCE AI - FRAUD PREVENTION AND SECURITY POLICIES
+
+FRAUD DETECTION SYSTEM
+
+Our advanced AI-powered fraud detection system monitors all transactions 24/7 for suspicious activity. We analyze hundreds of data points including:
+- Transaction location and merchant
+- Purchase patterns and spending behavior
+- Device and IP address information
+- Transaction velocity and frequency
+- Historical account activity
+
+TRANSACTION MONITORING
+
+Real-Time Alerts:
+- Unusual spending patterns detected
+- Large transactions exceeding typical amounts
+- International transactions (if not common)
+- Multiple transactions in short timeframe
+- Transactions from new devices or locations
+- High-risk merchant categories
+
+Automatic Holds:
+Transactions may be automatically blocked if:
+- Amount exceeds $5,000 (standard accounts)
+- Multiple failed PIN attempts
+- Transaction from high-risk country
+- Unusual location (far from your typical locations)
+- First international transaction
+- Merchant flagged for fraud
+
+IDENTITY VERIFICATION
+
+Two-Factor Authentication (2FA):
+- Required for all high-value transactions ($1,000+)
+- Login from new devices
+- Profile information changes
+- Adding external accounts
+- Password resets
+Available methods: SMS, email, authenticator app
+
+Device Recognition:
+- Trusted devices remembered for 90 days
+- New device login requires additional verification
+- Suspicious device characteristics flagged
+- Location tracking for added security
+
+Biometric Authentication:
+- Fingerprint login
+- Face ID recognition
+- Voice authentication for phone support
+- Ensures only you can access your account
+
+KNOW YOUR CUSTOMER (KYC) REQUIREMENTS
+
+Initial Account Opening:
+Required documents:
+1. Government-issued photo ID (driver's license, passport, state ID)
+2. Social Security Number or Tax ID
+3. Proof of address (utility bill, bank statement, lease)
+4. Date of birth verification
+5. Employment information
+
+Enhanced Due Diligence:
+Required for:
+- Business accounts
+- High net-worth individuals ($250,000+)
+- Frequent large transactions
+- International wire transfers
+- High-risk occupations or industries
+
+Ongoing Verification:
+- Annual identity re-verification
+- Address confirmation updates
+- Beneficial ownership for businesses
+- Source of funds documentation for large deposits
+- Periodic risk assessment reviews
+
+SUSPICIOUS ACTIVITY REPORTING
+
+We are legally required to report:
+- Transactions over $10,000 (Currency Transaction Reports)
+- Suspected money laundering
+- Terrorist financing indicators
+- Structuring (breaking up large transactions)
+- Unusual patterns indicating fraud
+- Identity theft or account takeover
+
+CUSTOMER RESPONSIBILITIES
+
+Protect Your Information:
+- Never share password or PIN with anyone
+- Don't write down passwords in accessible places
+- Use unique passwords (not used on other sites)
+- Enable two-factor authentication
+- Keep contact information current
+
+Monitor Your Account:
+- Review transactions daily
+- Set up transaction alerts
+- Check monthly statements
+- Report discrepancies within 60 days
+- Verify mobile deposit success
+
+Report Unauthorized Activity:
+- Lock your card immediately in the app
+- Call fraud hotline: 1-800-FRAUD-01 (24/7)
+- Submit fraud report through app or website
+- File police report for identity theft
+- Request new card and account numbers
+
+Secure Your Devices:
+- Keep app updated to latest version
+- Use device passcode or biometric lock
+- Don't jailbreak or root your device
+- Install security updates promptly
+- Use secure WiFi (avoid public networks for banking)
+- Enable remote wipe capability
+
+FRAUD PREVENTION BEST PRACTICES
+
+Safe Online Shopping:
+- Verify website security (HTTPS, lock icon)
+- Shop with reputable merchants
+- Use credit card over debit for better protection
+- Check merchant reviews before purchase
+- Save receipts and confirmation emails
+- Enable virtual card numbers for one-time use
+
+ATM Safety:
+- Use ATMs in well-lit, monitored locations
+- Cover PIN pad when entering code
+- Inspect ATM for skimming devices
+- Take receipt or ensure it prints nothing
+- Don't accept help from strangers
+- If card is retained, call bank immediately
+
+Phishing Protection:
+Red flags for phishing:
+- Urgent requests for account information
+- Suspicious sender email addresses
+- Spelling and grammar errors
+- Requests to click unknown links
+- Threats of account closure
+- Requests for password or PIN
+
+Remember: We will NEVER:
+- Ask for your full password
+- Request PIN via email or phone
+- Send unsolicited links to click
+- Threaten immediate account closure
+- Request remote access to your device
+
+IDENTITY THEFT PROTECTION
+
+Warning Signs:
+- Unexpected credit card or account statements
+- Denial of credit for unknown reasons
+- Calls about purchases you didn't make
+- Missing mail or redirected mail
+- Accounts you didn't open appearing on credit report
+
+If You're a Victim:
+1. Lock all cards and accounts immediately
+2. File police report
+3. Place fraud alert with credit bureaus
+4. Review credit reports from all three bureaus
+5. Contact Social Security Administration (SSN theft)
+6. File FTC identity theft report
+7. Change all passwords and PINs
+8. Monitor accounts closely for 12+ months
+
+We Provide:
+- Free credit monitoring for fraud victims
+- Identity theft resolution assistance
+- Zero liability for unauthorized transactions
+- New account numbers and cards
+- Ongoing monitoring and alerts
+
+ACCOUNT TAKEOVER PREVENTION
+
+High-Risk Indicators:
+- Login from unusual location
+- Multiple failed login attempts
+- Request to change email/phone
+- Request for large transfers shortly after login
+- Disabling of security features
+- Adding new external accounts
+
+Protection Measures:
+- Login notifications to email/phone
+- Verification required for profile changes
+- Cooling-off period for new external accounts (3 days)
+- Transfer limits on newly added accounts
+- Multi-factor authentication enforcement
+- Session timeout after 15 minutes inactivity
+
+MERCHANT FRAUD
+
+Chargeback Rights:
+- Dispute unauthorized charges within 60 days
+- Temporary credit during investigation
+- We investigate all disputes within 10 business days
+- Keep documentation (receipts, communication)
+- Deadline: 60 days from statement date
+
+Common Merchant Fraud:
+- Charging more than authorized amount
+- Charging for undelivered goods/services
+- Subscription charges after cancellation
+- Fake charities
+- Advance-fee scams
+
+CRYPTOCURRENCY AND INVESTMENT SCAMS
+
+Warning Signs:
+- Guaranteed high returns with no risk
+- Pressure to invest immediately
+- Unsolicited investment advice
+- Too-good-to-be-true opportunities
+- Request for upfront fees
+- Pyramid or multi-level marketing schemes
+
+Remember:
+- Cryptocurrency transactions are irreversible
+- We don't offer cryptocurrency insurance
+- Verify investment advisors credentials
+- Research before investing
+- Report suspicious investment offers
+
+INTERNATIONAL TRANSACTION SECURITY
+
+Additional Verification for:
+- First international transaction
+- Countries on high-risk list
+- Large international transfers ($5,000+)
+- International wire transfers
+- Currency exchanges
+
+Travel Notifications:
+Set travel alerts to prevent declined transactions:
+- App: Settings > Cards > Travel Notification
+- Specify countries and dates
+- Prevents automatic fraud holds
+- Ensures uninterrupted access
+
+COMPROMISED CARD PROCEDURES
+
+If Card is Lost or Stolen:
+1. Lock card immediately in app (Settings > Cards > Lock)
+2. Review recent transactions for fraud
+3. Report as lost/stolen in app or call support
+4. Request replacement card:
+   - Standard delivery: 7-10 business days (free)
+   - Express delivery: 2-3 business days ($25 fee)
+5. Update recurring payments with new card number
+
+Temporary Card Numbers:
+Generate virtual card numbers for:
+- Online shopping
+- Subscription trials
+- Untrusted merchants
+- One-time purchases
+Settings > Cards > Generate Virtual Card
+
+BUSINESS ACCOUNT FRAUD PREVENTION
+
+Additional Requirements:
+- Multiple user access controls
+- Approval workflows for large transactions
+- Segregation of duties
+- Regular audit logs review
+- Employee access monitoring
+- Beneficial ownership verification
+
+Recommended Practices:
+- Separate business and personal accounts
+- Implement maker-checker controls
+- Set transaction limits by user role
+- Review employee access quarterly
+- Enable multi-signature requirements
+- Monitor for insider threats
+
+REGULATORY COMPLIANCE
+
+We comply with:
+- Bank Secrecy Act (BSA)
+- USA PATRIOT Act
+- Anti-Money Laundering (AML) regulations
+- Office of Foreign Assets Control (OFAC)
+- Know Your Customer (KYC) requirements
+- Fair Credit Reporting Act (FCRA)
+- Gramm-Leach-Bliley Act (GLBA)
+
+Your Rights:
+- Access to your personal information
+- Correction of inaccurate information
+- Explanation of credit decisions
+- Dispute resolution process
+- Privacy protection
+- Fair treatment and non-discrimination
+
+ZERO LIABILITY GUARANTEE
+
+You are not liable for unauthorized transactions if:
+- You report within 60 days of statement
+- You did not contribute to the loss
+- You have practiced reasonable security
+- You cooperate with investigation
+
+Coverage includes:
+- Unauthorized debit card purchases
+- Unauthorized online transactions
+- Forged checks
+- Unauthorized wire transfers
+- Account takeover losses
+
+FRAUD REPORTING TIMELINE
+
+Report immediately: 
+- Unauthorized transactions
+- Lost or stolen card
+- Compromised login credentials
+- Suspicious activity
+
+Report within 2 business days:
+- Minimizes your liability to $50
+
+Report within 60 days:
+- Required for debit card fraud protection
+- After 60 days, you may be liable for all losses
+
+SECURITY UPDATES
+
+We continuously enhance security:
+- Regular system security audits
+- Penetration testing quarterly
+- Software updates and patches
+- Encryption protocol upgrades
+- Fraud detection algorithm improvements
+- Employee security training
+- Third-party security assessments
+
+Stay Informed:
+- Security blog: blog.smartfinanceai.com/security
+- Email security alerts (opt-in)
+- In-app security tips
+- Annual security report
+- Fraud prevention workshops
+

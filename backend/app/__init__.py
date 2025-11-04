@@ -1,0 +1,2 @@
+# SmartFinance AI Backend Application
+
