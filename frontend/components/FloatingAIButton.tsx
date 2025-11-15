@@ -26,6 +26,7 @@ export function FloatingAIButton() {
   const [backendConnected, setBackendConnected] = useState<boolean | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const [sessionId] = useState(() => `floating-${Date.now()}`)
+  const audioEnabledRef = useRef(audioEnabled) // Track audio state for immediate access
 
   // Check backend connection
   useEffect(() => {
@@ -54,8 +55,13 @@ export function FloatingAIButton() {
     scrollToBottom()
   }, [messages])
 
+  // Keep ref in sync with state
+  useEffect(() => {
+    audioEnabledRef.current = audioEnabled
+  }, [audioEnabled])
+
   const speakText = (text: string) => {
-    if (!audioEnabled || !('speechSynthesis' in window)) return
+    if (!audioEnabled || !audioEnabledRef.current || !('speechSynthesis' in window)) return
     
     window.speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(text)
@@ -254,9 +260,33 @@ export function FloatingAIButton() {
             </div>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setAudioEnabled(!audioEnabled)}
+                onClick={() => {
+                  const newAudioState = !audioEnabled
+                  
+                  // ALWAYS stop any ongoing speech immediately and forcefully
+                  if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel()
+                    window.speechSynthesis.pause()
+                    // Clear the queue completely with multiple attempts
+                    setTimeout(() => window.speechSynthesis.cancel(), 10)
+                    setTimeout(() => window.speechSynthesis.cancel(), 50)
+                  }
+                  
+                  // Update ref immediately for instant effect
+                  audioEnabledRef.current = newAudioState
+                  setAudioEnabled(newAudioState)
+                  
+                  // If turning ON audio, announce it (with delay to ensure cancel completed)
+                  if (newAudioState) {
+                    setTimeout(() => {
+                      if (audioEnabledRef.current) {
+                        speakText('Audio enabled')
+                      }
+                    }, 200)
+                  }
+                }}
                 className="p-1.5 hover:bg-white/20 rounded transition-colors"
-                aria-label={audioEnabled ? "Disable audio" : "Enable audio"}
+                aria-label={audioEnabled ? "Click to STOP audio and mute" : "Click to enable audio"}
               >
                 {audioEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
               </button>
