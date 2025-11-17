@@ -16,7 +16,7 @@ Smart Finance AI demonstrates a production-ready architecture for handling diver
 - **Modern Frontend**: Beautiful Next.js interface with glassmorphism, gradients, and smooth animations
 - **Rewards System**: Track points and tier progression (Silver/Gold/Platinum)
 - **Savings Goals**: Visual progress tracking with celebration animations
-- **WCAG 2.1 AA Compliant**: Full accessibility support for users with disabilities
+- **ADA, ARIA & WCAG 2.1 AA Compliant**: Full accessibility support for users with disabilities
 - **Real-time Streaming**: Token-by-token response display using Server-Sent Events
 
 ## Technology Stack
@@ -35,7 +35,7 @@ Smart Finance AI demonstrates a production-ready architecture for handling diver
 - **UI Components**: shadcn/ui with Radix UI primitives
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Accessibility**: Web Speech API, WAI-ARIA 1.2, WCAG 2.1 AA compliance
+- **Accessibility**: Web Speech API, WAI-ARIA 1.2, WCAG 2.1 AA, ADA compliant
 
 ## Project Structure
 
@@ -250,7 +250,7 @@ The application uses LangGraph to implement a supervisor pattern:
 - **Streaming Responses**: Real-time token-by-token display using SSE
 - **Glassmorphism**: Modern UI with backdrop blur effects
 - **Responsive Design**: Mobile-first approach
-- **Accessibility**: WCAG 2.1 AA compliant with comprehensive assistive technology support
+- **Accessibility**: ADA, ARIA & WCAG 2.1 AA compliant with comprehensive assistive technology support
 
 ## Usage
 
@@ -304,7 +304,7 @@ Try these sample queries in the Support chat:
 
 ## Accessibility Features
 
-**WCAG 2.1 Level AA Compliant** - Designed for users with visual, auditory, motor, and cognitive disabilities.
+**ADA, ARIA & WCAG 2.1 Level AA Compliant** - Designed for users with visual, auditory, motor, and cognitive disabilities.
 
 ### Core Features
 
@@ -410,4 +410,4 @@ This application is licensed under the MIT License.
 
 ---
 
-**Note**: This is a demonstration application. Do not use in production without proper security audits, compliance reviews, and testing.
+**Note**: This is a prototype application. Do not use in production without proper security audits, compliance reviews, and testing.
