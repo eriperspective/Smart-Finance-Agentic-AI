@@ -1,10 +1,10 @@
-# SmartFinance AI - Intelligent Financial Support Application
+# Smart Finance AI - Intelligent Financial Support Application
 
 An Agnegtic AI and sophisticated customer service application powered by a multi-agent AI system designed for banking and FinTech use cases. Built with modern technologies including FastAPI, LangGraph, Next.js, and integrated with both OpenAI and AWS Bedrock for optimal cost and performance.
 
 ## Project Overview
 
-SmartFinance AI demonstrates a production-ready architecture for handling diverse customer inquiries by routing them to specialized AI agents, each employing different retrieval strategies (RAG, CAG, and Hybrid) tailored to their specific needs.
+Smart Finance AI demonstrates a production-ready architecture for handling diverse customer inquiries by routing them to specialized AI agents, each employing different retrieval strategies (RAG, CAG, and Hybrid) tailored to their specific needs.
 
 ### Key Features
 
@@ -16,7 +16,7 @@ SmartFinance AI demonstrates a production-ready architecture for handling divers
 - **Modern Frontend**: Beautiful Next.js interface with glassmorphism, gradients, and smooth animations
 - **Rewards System**: Track points and tier progression (Silver/Gold/Platinum)
 - **Savings Goals**: Visual progress tracking with celebration animations
-- **Accessibility**: Audio assistance for hearing impaired users
+- **WCAG 2.1 AA Compliant**: Full accessibility support for users with disabilities
 - **Real-time Streaming**: Token-by-token response display using Server-Sent Events
 
 ## Technology Stack
@@ -35,6 +35,7 @@ SmartFinance AI demonstrates a production-ready architecture for handling divers
 - **UI Components**: shadcn/ui with Radix UI primitives
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
+- **Accessibility**: Web Speech API, WAI-ARIA 1.2, WCAG 2.1 AA compliance
 
 ## Project Structure
 
@@ -66,16 +67,19 @@ SmartFinance AI/
 │   │   ├── goals/page.tsx                # Savings goals
 │   │   ├── support/page.tsx              # AI chat interface
 │   │   ├── profile/page.tsx              # User profile
-│   │   └── layout.tsx                    # Root layout
+│   │   ├── layout.tsx                    # Root layout
+│   │   └── globals.css                   # Global styles & accessibility
 │   ├── components/
 │   │   ├── ui/                           # shadcn/ui components
 │   │   ├── BottomNav.tsx                 # Navigation bar
+│   │   ├── FloatingAIButton.tsx          # Floating AI assistant
 │   │   └── CelebrationModal.tsx          # Achievement animations
 │   ├── lib/
 │   │   └── utils.ts                      # Utility functions
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── tailwind.config.ts
+├── ACCESSIBILITY.md                      # Accessibility documentation
 └── README.md
 ```
 
@@ -246,7 +250,7 @@ The application uses LangGraph to implement a supervisor pattern:
 - **Streaming Responses**: Real-time token-by-token display using SSE
 - **Glassmorphism**: Modern UI with backdrop blur effects
 - **Responsive Design**: Mobile-first approach
-- **Accessibility**: Audio assistance using Web Speech API
+- **Accessibility**: WCAG 2.1 AA compliant with comprehensive assistive technology support
 
 ## Usage
 
@@ -295,12 +299,14 @@ Try these sample queries in the Support chat:
 2. **Rewards**: Track tier progression (Silver → Gold → Platinum)
 3. **Goals**: Monitor savings goals with visual progress bars
 4. **Support**: Chat with AI agents with streaming responses
-5. **Profile**: Manage account settings and preferences
-6. **Accessibility**: Enable audio assistance for hearing impaired users
+5. **Profile**: Manage account settings and accessibility preferences
+6. **Accessibility**: Audio assistance, high contrast mode, font sizing, keyboard navigation
 
 ## Accessibility Features
 
-The application includes several accessibility features:
+**WCAG 2.1 Level AA Compliant** - Designed for users with visual, auditory, motor, and cognitive disabilities.
+
+### Core Features
 
 - **Audio Assistance**: Toggle audio to have AI responses read aloud using text-to-speech
   - Click the speaker icon in the Support tab header
@@ -310,11 +316,23 @@ The application includes several accessibility features:
 - **Connection Status**: Visual indicator shows when backend AI is active
   - Green dot = "Full Agentic AI Active"
   - Yellow dot = "Local AI Mode"
-- **Screen Reader Support**: Semantic HTML and ARIA labels
-- **Keyboard Navigation**: Full keyboard support
-- **High Contrast**: Clear visual hierarchy with sufficient contrast
-- **Large Touch Targets**: Mobile-friendly button sizes
+- **Screen Reader Support**: Semantic HTML and ARIA labels for NVDA, JAWS, and VoiceOver
+- **Keyboard Navigation**: Full keyboard support with shortcuts (`Ctrl+/`, `Escape`, `Enter`)
+- **High Contrast Mode**: Clear visual hierarchy with 150% contrast boost and sufficient contrast (4.5:1 ratio)
+- **Font Size Control**: Three-tier scaling (normal/large/extra-large) up to 200%
+- **Large Touch Targets**: Mobile-friendly button sizes (minimum 44x44 pixels)
+- **Focus Indicators**: Visible 2px blue rings for keyboard navigation
+- **Skip Navigation**: Bypass repetitive elements with a single Tab press
+- **Reduced Motion**: Respects `prefers-reduced-motion` for users with vestibular disorders
 - **Graceful Degradation**: App works even when backend is unavailable
+
+### Accessibility Components
+- **BottomNav**: ARIA navigation landmarks with current page indication
+- **FloatingAIButton**: Dialog with keyboard shortcuts and focus management
+- **Support Chat**: Live regions for message announcements, loading state indicators
+- **Profile Settings**: Centralized accessibility preferences with localStorage persistence
+
+For complete technical documentation, see **[ACCESSIBILITY.md](ACCESSIBILITY.md)**
 
 ## API Endpoints
 
@@ -388,8 +406,8 @@ Each agent can be customized in `backend/app/agents/`:
 
 ## License
 
-This project is licensed under the MIT License.
+This application is licensed under the MIT License.
 
 ---
 
-**Note**: This is a demonstration project. Do not use in production without proper security audits, compliance reviews, and testing.
+**Note**: This is a demonstration application. Do not use in production without proper security audits, compliance reviews, and testing.

@@ -60,6 +60,37 @@ export function FloatingAIButton() {
     audioEnabledRef.current = audioEnabled
   }, [audioEnabled])
 
+  // Keyboard shortcuts for accessibility
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Escape to close chat
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setIsOpen(false)
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel()
+        }
+      }
+      // Ctrl+/ or Cmd+/ to toggle audio
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault()
+        const newAudioState = !audioEnabled
+        audioEnabledRef.current = newAudioState
+        setAudioEnabled(newAudioState)
+        if (newAudioState) {
+          setTimeout(() => speakText('Audio enabled'), 100)
+        } else if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, audioEnabled])
+
   const speakText = (text: string) => {
     if (!audioEnabled || !audioEnabledRef.current || !('speechSynthesis' in window)) return
     
@@ -234,7 +265,8 @@ export function FloatingAIButton() {
           "hover:scale-110 active:scale-95",
           isOpen && "scale-0 opacity-0"
         )}
-        aria-label="Open AI Assistant"
+        aria-label={isOpen ? "Close AI Assistant" : "Open AI Assistant"}
+        title={isOpen ? "Close chat (Escape)" : "Open chat"}
       >
         <MessageCircle className="w-6 h-6 text-white" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white animate-pulse" />
@@ -242,9 +274,17 @@ export function FloatingAIButton() {
 
       {/* Chat Dialog */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-[380px] h-[550px] flex flex-col shadow-2xl rounded-2xl overflow-hidden bg-white border border-gray-200">
+        <div 
+          className="fixed bottom-24 right-6 z-40 w-[380px] h-[550px] flex flex-col shadow-2xl rounded-2xl overflow-hidden bg-white border border-gray-200"
+          role="dialog"
+          aria-label="AI Assistant Chat"
+        >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+          <div 
+            className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+            role="region"
+            aria-label="Chat header"
+          >
             <div className="flex items-center gap-2">
               <Bot className="w-5 h-5" />
               <div>
@@ -301,7 +341,12 @@ export function FloatingAIButton() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div 
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50"
+            role="log"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -309,6 +354,8 @@ export function FloatingAIButton() {
                   "flex gap-3",
                   message.role === 'user' ? "justify-end" : "justify-start"
                 )}
+                role="article"
+                aria-label={message.role === 'user' ? 'Your message' : 'AI assistant response'}
               >
                 {message.role === 'assistant' && (
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center flex-shrink-0">
@@ -334,7 +381,7 @@ export function FloatingAIButton() {
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-3 justify-start">
+              <div className="flex gap-3 justify-start" role="status" aria-live="polite" aria-label="AI is typing">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
                   <Bot className="w-5 h-5 text-white" />
                 </div>
@@ -361,6 +408,7 @@ export function FloatingAIButton() {
                 placeholder="Ask me anything..."
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
                 disabled={isLoading}
+                aria-label="Type your message here, press Enter to send"
               />
               <button
                 onClick={sendMessage}

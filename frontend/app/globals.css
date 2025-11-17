@@ -37,6 +37,20 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  
+  /* Accessibility: Focus Indicators for Keyboard Navigation */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-blue-600 ring-offset-2 ring-offset-white;
+  }
+  
+  /* Ensure buttons and links have visible focus */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-blue-600 ring-offset-2;
+  }
 }
 
 @layer utilities {
@@ -105,5 +119,48 @@ body.high-contrast .text-gray-500 {
 
 .animate-gentle-bounce {
   animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+/* Accessibility: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-gentle-bounce,
+  .animate-pulse,
+  .animate-spin,
+  .animate-bounce,
+  .animate-slide-up {
+    animation: none !important;
+  }
+}
+
+/* Accessibility: Improved Color Contrast for WCAG AA Compliance */
+/* Ensure text meets 4.5:1 contrast ratio */
+.text-gray-400 {
+  @apply text-gray-600; /* Improved contrast */
+}
+
+.text-gray-500 {
+  @apply text-gray-700; /* Improved contrast */
+}
+
+/* Screen Reader Only utility class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 

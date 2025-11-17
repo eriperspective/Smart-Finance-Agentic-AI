@@ -72,9 +72,10 @@ export default function SupportPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+  // Auto-scroll disabled - page stays at top for better UX
+  // useEffect(() => {
+  //   scrollToBottom()
+  // }, [messages])
 
   const speakText = (text: string) => {
     if ('speechSynthesis' in window) {
@@ -121,7 +122,7 @@ export default function SupportPage() {
         if (!selectedVoice) {
           selectedVoice = voices.find(voice => 
             voice.name.toLowerCase().includes('female') || 
-            voice.name.includes('Zira') ||
+          voice.name.includes('Zira') ||
             voice.name.includes('Samantha')
           )
         }
@@ -216,9 +217,9 @@ CURRENT USER FINANCIAL PROFILE:
 
       if (reader) {
         try {
-          while (true) {
-            const { done, value } = await reader.read()
-            if (done) break
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
 
             // Decode and add to buffer
             buffer += decoder.decode(value, { stream: true })
@@ -227,54 +228,58 @@ CURRENT USER FINANCIAL PROFILE:
             const lines = buffer.split('\n')
             buffer = lines.pop() || '' // Keep the last (possibly incomplete) line in buffer
 
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                try {
-                  const jsonStr = line.slice(6).trim()
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              try {
+                  let jsonStr = line.slice(6).trim()
+                  // Handle double "data: " prefix if present
+                  if (jsonStr.startsWith('data: ')) {
+                    jsonStr = jsonStr.slice(6).trim()
+                  }
                   if (!jsonStr) continue // Skip empty lines
                   
                   const data = JSON.parse(jsonStr)
+                
+                if (data.error) {
+                  throw new Error(data.error)
+                }
+
+                if (data.content) {
+                  assistantMessage += data.content
+                  agentUsed = data.agent || agentUsed
                   
-                  if (data.error) {
-                    throw new Error(data.error)
-                  }
-
-                  if (data.content) {
-                    assistantMessage += data.content
-                    agentUsed = data.agent || agentUsed
+                  // Update the message in real-time
+                  setMessages(prev => {
+                    const newMessages = [...prev]
+                    const lastMessage = newMessages[newMessages.length - 1]
                     
-                    // Update the message in real-time
-                    setMessages(prev => {
-                      const newMessages = [...prev]
-                      const lastMessage = newMessages[newMessages.length - 1]
-                      
-                      if (lastMessage?.role === 'assistant') {
-                        newMessages[newMessages.length - 1] = {
-                          role: 'assistant',
-                          content: assistantMessage,
-                          agent: agentUsed,
-                        }
-                      } else {
-                        newMessages.push({
-                          role: 'assistant',
-                          content: assistantMessage,
-                          agent: agentUsed,
-                        })
+                    if (lastMessage?.role === 'assistant') {
+                      newMessages[newMessages.length - 1] = {
+                        role: 'assistant',
+                        content: assistantMessage,
+                        agent: agentUsed,
                       }
-                      
-                      return newMessages
-                    })
-                  }
-
-                  if (data.done) {
-                    streamComplete = true
-                    // Speak the complete message if audio is enabled
-                    if (audioEnabled && assistantMessage) {
-                      speakText(assistantMessage)
+                    } else {
+                      newMessages.push({
+                        role: 'assistant',
+                        content: assistantMessage,
+                        agent: agentUsed,
+                      })
                     }
-                    break
+                    
+                    return newMessages
+                  })
+                }
+
+                if (data.done) {
+                    streamComplete = true
+                  // Speak the complete message if audio is enabled
+                  if (audioEnabled && assistantMessage) {
+                    speakText(assistantMessage)
                   }
-                } catch (e) {
+                  break
+                }
+              } catch (e) {
                   // Silently ignore incomplete chunks - they'll complete in next iteration
                   if (line.trim().endsWith('}')) {
                     console.error('Error parsing complete SSE line:', e, 'Line:', line)
@@ -366,6 +371,31 @@ CURRENT USER FINANCIAL PROFILE:
     }
   }
 
+  // Keyboard shortcuts for accessibility
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl+/ or Cmd+/ to toggle audio
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault()
+        const newAudioState = !audioEnabled
+        setAudioEnabled(newAudioState)
+        saveAccessibilitySettings({ audioEnabled: newAudioState })
+        if (newAudioState) {
+          speakText('Audio assistance enabled')
+        } else if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel()
+        }
+      }
+      // Escape to cancel ongoing speech
+      if (e.key === 'Escape' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [audioEnabled])
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
@@ -434,7 +464,11 @@ CURRENT USER FINANCIAL PROFILE:
       
     <div className="container mx-auto p-4 max-w-md h-screen flex flex-col pb-24 relative z-10">
       {/* Header */}
-      <div className="bg-white rounded-3xl p-4 shadow-xl mb-4">
+      <div 
+        className="bg-white rounded-3xl p-4 shadow-xl mb-4"
+        role="region"
+        aria-label="Chat controls and settings"
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-900 to-teal-600 flex items-center justify-center shadow-lg">
@@ -527,7 +561,12 @@ CURRENT USER FINANCIAL PROFILE:
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+      <div 
+        className="flex-1 overflow-y-auto space-y-4 mb-4"
+        role="log"
+        aria-live="polite"
+        aria-label="Chat conversation"
+      >
         {messages.map((message, index) => (
           <div
             key={index}
@@ -535,6 +574,8 @@ CURRENT USER FINANCIAL PROFILE:
               'flex gap-3',
               message.role === 'user' ? 'justify-end' : 'justify-start'
             )}
+            role="article"
+            aria-label={message.role === 'user' ? 'Your message' : 'AI assistant message'}
           >
             {message.role === 'assistant' && (
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-900 to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md">
@@ -693,7 +734,7 @@ CURRENT USER FINANCIAL PROFILE:
                             } catch (e) {
                               // Silently ignore incomplete chunks
                               if (line.trim().endsWith('}')) {
-                                console.error('Error parsing SSE data:', e)
+                              console.error('Error parsing SSE data:', e)
                               }
                             }
                           }
@@ -773,7 +814,7 @@ CURRENT USER FINANCIAL PROFILE:
           </div>
         )}
       </div>
-    </div>
+      </div>
     </div>
     </AuthGuard>
   )

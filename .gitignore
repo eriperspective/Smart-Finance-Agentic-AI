@@ -1,0 +1,5 @@
+# Documentation - exclude all .md files except README and ACCESSIBILITY
+*.md
+!README.md
+!ACCESSIBILITY.md
+
