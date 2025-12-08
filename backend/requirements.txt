@@ -11,4 +11,5 @@ pydantic-settings
 boto3
 tiktoken
 sse-starlette
+numpy<2.0.0
 
