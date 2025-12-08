@@ -5,6 +5,7 @@ import { MessageCircle, Send, Bot, User, Volume2, VolumeX, X, Minimize2 } from '
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { API_ENDPOINTS, API_URL } from '@/lib/config'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -32,7 +33,7 @@ export function FloatingAIButton() {
   useEffect(() => {
     const checkBackend = async () => {
       try {
-        const response = await fetch('http://localhost:8000/health', {
+        const response = await fetch(API_ENDPOINTS.health, {
           method: 'GET',
           signal: AbortSignal.timeout(5000)
         })
@@ -125,7 +126,7 @@ export function FloatingAIButton() {
 
     try {
       if (backendConnected) {
-        const response = await fetch('http://localhost:8000/api/chat/stream', {
+        const response = await fetch(API_ENDPOINTS.chatStream, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -215,7 +216,7 @@ export function FloatingAIButton() {
         // Backend not connected - show connection error
         const errorMessage: Message = {
           role: 'assistant',
-          content: '❌ Unable to connect to the AI backend. Please make sure the backend server is running on http://localhost:8000\n\nCheck your backend terminal for errors.',
+          content: `❌ Unable to connect to the AI backend. Please make sure the backend server is running on ${API_URL}\n\nCheck your backend terminal for errors.`,
           agent: 'error'
         }
         setMessages(prev => [...prev, errorMessage])
@@ -225,7 +226,7 @@ export function FloatingAIButton() {
       // Show the actual error instead of fallback
       const errorMessage: Message = {
         role: 'assistant',
-        content: `❌ Error communicating with AI: ${error instanceof Error ? error.message : String(error)}\n\nPlease check:\n• Backend is running (http://localhost:8000)\n• OpenAI API key is configured\n• Check backend terminal for detailed errors`,
+        content: `❌ Error communicating with AI: ${error instanceof Error ? error.message : String(error)}\n\nPlease check:\n• Backend is running (${API_URL})\n• OpenAI API key is configured\n• Check backend terminal for detailed errors`,
         agent: 'error'
       }
       setMessages(prev => [...prev, errorMessage])

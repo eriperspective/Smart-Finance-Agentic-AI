@@ -25,7 +25,12 @@ app = FastAPI(
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://*.vercel.app",  # Your Vercel frontend
+        os.getenv("FRONTEND_URL", ""),  # Production frontend URL
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -49,9 +54,18 @@ async def root():
 @app.get("/health")
 async def health():
     """Health check endpoint"""
+    use_mock = os.getenv("USE_MOCK_AI", "false").lower() == "true"
+    openai_key = os.getenv("OPENAI_API_KEY", "")
+    
+    # Auto-detect mock mode if no API key
+    if not openai_key or openai_key == "":
+        use_mock = True
+    
     return {
         "status": "healthy",
-        "environment": os.getenv("ENVIRONMENT", "development")
+        "environment": os.getenv("ENVIRONMENT", "development"),
+        "mode": "demo" if use_mock else "live",
+        "ai_provider": "mock" if use_mock else "openai"
     }
 
 

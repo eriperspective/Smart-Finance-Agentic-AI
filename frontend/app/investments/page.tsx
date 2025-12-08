@@ -50,7 +50,25 @@ export default function InvestmentsPage() {
     }
   ])
 
-  // Simulate live price updates
+  // Float animation keyframes
+  useEffect(() => {
+    const style = document.createElement('style')
+    style.innerHTML = `
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+      .float-animation {
+        animation: float 3s ease-in-out infinite;
+      }
+    `
+    document.head.appendChild(style)
+    return () => {
+      document.head.removeChild(style)
+    }
+  }, [])
+
+  // Simulate live price updates with moving charts
   useEffect(() => {
     const interval = setInterval(() => {
       setStocks(prevStocks =>
@@ -60,11 +78,15 @@ export default function InvestmentsPage() {
           const newChange = stock.change + priceChange
           const newChangePercent = (newChange / (newPrice - newChange)) * 100
           
+          // Update chart data - add new point and remove oldest
+          const newChartData = [...stock.chartData.slice(1), stock.chartData[stock.chartData.length - 1] + (priceChange * 0.5)]
+          
           return {
             ...stock,
             price: Number(newPrice.toFixed(2)),
             change: Number(newChange.toFixed(2)),
-            changePercent: Number(newChangePercent.toFixed(2))
+            changePercent: Number(newChangePercent.toFixed(2)),
+            chartData: newChartData
           }
         })
       )
@@ -105,6 +127,7 @@ export default function InvestmentsPage() {
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
+          style={{ transition: 'all 0.8s ease-in-out' }}
         />
       </svg>
     )
@@ -138,7 +161,7 @@ export default function InvestmentsPage() {
         <div className="relative">
           <button 
             onClick={() => setShowNotifications(!showNotifications)}
-            className="p-2 rounded-full hover:bg-white/20 transition-all relative"
+            className="p-2 rounded-full hover:bg-white/20 transition-all relative float-animation"
           >
             <Bell className="w-6 h-6 text-white" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
@@ -243,15 +266,15 @@ export default function InvestmentsPage() {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center p-2" style={{
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center p-3" style={{
                         backgroundColor: '#1e3a8a'
                       }}>
                         {stock.symbol === 'AAPL' && (
                           <Image 
                             src="/apple-logo.svg" 
                             alt="Apple Logo" 
-                            width={32} 
-                            height={32}
+                            width={24} 
+                            height={24}
                             className="w-full h-full object-contain"
                           />
                         )}
@@ -259,8 +282,8 @@ export default function InvestmentsPage() {
                           <Image 
                             src="/amazon-logo.svg" 
                             alt="Amazon Logo" 
-                            width={32} 
-                            height={32}
+                            width={36} 
+                            height={36}
                             className="w-full h-full object-contain"
                           />
                         )}

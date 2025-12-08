@@ -87,15 +87,23 @@ async def chat_stream(request: ChatRequest):
     Streaming chat endpoint using Server-Sent Events (SSE)
     Returns token-by-token response for real-time display
     """
-    if not request.message or len(request.message.strip()) == 0:
-        raise HTTPException(status_code=400, detail="Message cannot be empty")
-    
-    session_id = request.session_id or "default"
-    
-    return EventSourceResponse(
-        generate_chat_stream(request.message, session_id, request.user_context),
-        media_type="text/event-stream"
-    )
+    try:
+        print(f"[Stream] Received request: message='{request.message[:50]}...', session_id='{request.session_id}'")
+        
+        if not request.message or len(request.message.strip()) == 0:
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        
+        session_id = request.session_id or "default"
+        
+        return EventSourceResponse(
+            generate_chat_stream(request.message, session_id, request.user_context),
+            media_type="text/event-stream"
+        )
+    except Exception as e:
+        print(f"[Stream] ERROR: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise
 
 
 @router.post("/chat", response_model=ChatResponse)

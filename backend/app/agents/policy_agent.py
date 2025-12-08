@@ -14,7 +14,7 @@ class PolicyComplianceAgent:
     """
     
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4", temperature=0.1)
+        self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.1, timeout=30, request_timeout=30)
         
         self.system_prompt = """You are a comprehensive financial advisor and AI assistant for SmartFinance AI.
         

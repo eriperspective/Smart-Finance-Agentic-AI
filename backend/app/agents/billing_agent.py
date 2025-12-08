@@ -14,7 +14,7 @@ class BillingAgent:
     """
     
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4", temperature=0.3)
+        self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3, timeout=30, request_timeout=30)
         self.collection_name = "billing_documents"
         self.session_cache: Dict[str, List[str]] = {}
         
@@ -69,49 +69,19 @@ class BillingAgent:
     def process_query(self, query: str, session_id: str, user_context: str = None) -> str:
         """Process billing query using Hybrid RAG/CAG strategy"""
         
-        # Use provided user context or generic approach
-        if not user_context:
-            user_context = """
-GENERAL CONTEXT:
-You are helping a SmartFinance AI customer with their banking questions.
-Provide helpful, accurate advice without assuming specific account details.
-"""
-        
-        # Check if we have cached information for this session
-        if session_id in self.session_cache:
-            # Use CAG - cached context
-            context = "\n".join(self.session_cache[session_id])
-        else:
-            # Use RAG - retrieve from vector store
-            context_docs = vector_store.query_documents(
-                collection_name=self.collection_name,
-                query=query,
-                k=3
-            )
-            context = "\n".join(context_docs)
+        try:
+            # Simplified: Just answer the question directly without complex context
+            simple_prompt = f"You are a financial advisor. Answer this question briefly and helpfully: {query}"
             
-            # Cache for future queries in this session
-            self.session_cache[session_id] = context_docs
-        
-        # Create prompt with context
-        prompt = ChatPromptTemplate.from_messages([
-            SystemMessage(content=self.system_prompt),
-            HumanMessage(content=f"""Billing & Financial Context:
-{context}
-
-{user_context}
-
-User Question: {query}
-
-Please provide a personalized, helpful response based on the context and user's financial profile above.
-Reference their specific transactions, balance, or spending patterns when relevant.""")
-        ])
-        
-        # Generate response
-        messages = prompt.format_messages()
-        response = self.llm.invoke(messages)
-        
-        return response.content
+            print(f"[Billing Agent] Calling GPT-3.5-turbo...")
+            response = self.llm.invoke(simple_prompt)
+            print(f"[Billing Agent] Got response: {len(response.content)} chars")
+            return response.content
+        except Exception as e:
+            print(f"[Billing Agent] ERROR: {type(e).__name__}: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            raise
     
     def clear_cache(self, session_id: str):
         """Clear cached data for a session"""

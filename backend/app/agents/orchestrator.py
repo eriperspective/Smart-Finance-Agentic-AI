@@ -9,6 +9,7 @@ import os
 from .billing_agent import BillingAgent
 from .technical_support_agent import TechnicalSupportAgent
 from .policy_agent import PolicyComplianceAgent
+from .mock_agent import mock_agent
 
 
 class AgentState(TypedDict):
@@ -27,7 +28,30 @@ class AgentOrchestrator:
     """
     
     def __init__(self):
-        # Try to use AWS Bedrock Claude for cost-effective routing, fallback to OpenAI
+        # Check if we should use mock mode (for demo/development without API keys)
+        use_mock = os.getenv("USE_MOCK_AI", "false").lower() == "true"
+        openai_key = os.getenv("OPENAI_API_KEY", "")
+        
+        # Auto-enable mock mode if no OpenAI key is available
+        if not openai_key or openai_key == "":
+            use_mock = True
+            print("\n" + "="*60)
+            print("⚠️  NO OPENAI API KEY DETECTED - USING MOCK AI MODE")
+            print("="*60)
+            print("Mock mode provides realistic demo responses without API costs.")
+            print("To use real AI, set OPENAI_API_KEY in your environment.")
+            print("="*60 + "\n")
+        
+        self.use_mock = use_mock
+        
+        if self.use_mock:
+            print("✓ Mock AI Agent initialized - Ready for demo!")
+            print("\n" + "="*50)
+            print("SmartFinance AI Demo Mode Active")
+            print("="*50 + "\n")
+            return
+        
+        # Real AI mode - Try to use AWS Bedrock Claude for cost-effective routing, fallback to OpenAI
         try:
             from langchain_community.chat_models import BedrockChat
             
@@ -161,8 +185,21 @@ USER QUESTION: {user_message}
 
 Respond with ONLY the agent name (billing_agent, technical_agent, or policy_agent)."""
 
-        response = self.router_llm.invoke([HumanMessage(content=routing_prompt)])
-        agent_choice = response.content.strip().lower()
+        try:
+            response = self.router_llm.invoke([HumanMessage(content=routing_prompt)])
+            agent_choice = response.content.strip().lower()
+        except Exception as e:
+            # If Bedrock fails during invoke, fall back to OpenAI
+            print(f"⚠️  Router LLM error ({str(e)}), falling back to OpenAI...")
+            self.router_llm = ChatOpenAI(
+                model="gpt-3.5-turbo",
+                temperature=0.1,
+                max_tokens=200
+            )
+            print("✓ Switched to OpenAI GPT-3.5-turbo for routing")
+            # Retry with OpenAI
+            response = self.router_llm.invoke([HumanMessage(content=routing_prompt)])
+            agent_choice = response.content.strip().lower()
         
         # Validate and clean the response
         if "billing" in agent_choice:
@@ -233,6 +270,11 @@ Respond with ONLY the agent name (billing_agent, technical_agent, or policy_agen
         try:
             if not session_id:
                 session_id = str(uuid.uuid4())
+            
+            # Use mock agent if in demo mode
+            if self.use_mock:
+                print(f"[Mock AI] Processing: {message[:100]}")
+                return mock_agent.process_query(message, session_id, user_context)
             
             print(f"[Orchestrator] Processing: {message[:100]}")
             

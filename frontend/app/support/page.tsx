@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { MessageCircle, Send, Bot, User, Volume2, VolumeX } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AuthGuard } from '@/components/AuthGuard'
+import { API_ENDPOINTS, API_URL } from '@/lib/config'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -52,7 +53,7 @@ export default function SupportPage() {
     // Initial backend connection check
     const checkBackend = async () => {
       try {
-        const response = await fetch('http://localhost:8000/health', {
+        const response = await fetch(API_ENDPOINTS.health, {
           method: 'GET',
           signal: AbortSignal.timeout(5000)
         })
@@ -186,7 +187,7 @@ CURRENT USER FINANCIAL PROFILE:
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 60000) // 60 second timeout for AI processing (GPT-4 can be slow)
       
-      const response = await fetch('http://localhost:8000/api/chat/stream', {
+      const response = await fetch(API_ENDPOINTS.chatStream, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -354,9 +355,9 @@ CURRENT USER FINANCIAL PROFILE:
       if (isTimeout) {
         helpfulMessage += `**Issue:** The AI request timed out (took longer than 60 seconds).\n\n**Solutions:**\n• The AI might be processing - please try again\n• Simplify your question for faster processing\n• Check backend terminal for OpenAI API errors`
       } else if (isNetworkError) {
-        helpfulMessage += `**Issue:** Cannot reach the backend server.\n\n**Solutions:**\n• Ensure backend is running: http://localhost:8000\n• Check the backend terminal for errors\n• Restart backend if needed`
+        helpfulMessage += `**Issue:** Cannot reach the backend server.\n\n**Solutions:**\n• Ensure backend is running: ${API_URL}\n• Check the backend terminal for errors\n• Restart backend if needed`
       } else {
-        helpfulMessage += `**Error:** ${errorMsg}\n\n**Solutions:**\n• Check backend is running: http://localhost:8000\n• Verify OpenAI API key is set in backend/.env\n• Review backend terminal for detailed errors`
+        helpfulMessage += `**Error:** ${errorMsg}\n\n**Solutions:**\n• Check backend is running: ${API_URL}\n• Verify OpenAI API key is set in backend/.env\n• Review backend terminal for detailed errors`
       }
       
       helpfulMessage += `\n\n**Quick Fix:**\nRestart backend: \`cd backend && .\\venv\\Scripts\\activate && python -m uvicorn app.main:app --reload\``
@@ -662,7 +663,7 @@ CURRENT USER FINANCIAL PROFILE:
                     const controller = new AbortController()
                     const timeoutId = setTimeout(() => controller.abort(), 30000)
                     
-                    const response = await fetch('http://localhost:8000/api/chat/stream', {
+                    const response = await fetch(API_ENDPOINTS.chatStream, {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({ message: question, session_id: sessionId }),
@@ -749,7 +750,7 @@ CURRENT USER FINANCIAL PROFILE:
                     const errorMsg = error instanceof Error ? error.message : String(error)
                     setMessages(prev => [...prev, {
                       role: 'assistant',
-                      content: `❌ **AI Backend Connection Failed**\n\n**Error:** ${errorMsg}\n\n**Please check:**\n• Backend server is running at http://localhost:8000\n• OpenAI API key is configured in backend/.env\n• Review backend terminal for errors`,
+                      content: `❌ **AI Backend Connection Failed**\n\n**Error:** ${errorMsg}\n\n**Please check:**\n• Backend server is running at ${API_URL}\n• OpenAI API key is configured in backend/.env\n• Review backend terminal for errors`,
                       agent: 'error',
                     }])
                   } finally {

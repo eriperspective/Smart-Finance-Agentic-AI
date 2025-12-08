@@ -1,6 +1,8 @@
 # Smart Finance AI - Intelligent Financial Support Application
 
-An Agnegtic AI and sophisticated customer service application powered by a multi-agent AI system designed for banking and FinTech use cases. Built with modern technologies including FastAPI, LangGraph, Next.js, and integrated with both OpenAI and AWS Bedrock for optimal cost and performance.
+An Agentic AI and sophisticated customer service application powered by a multi-agent AI system designed for banking and FinTech use cases. Built with modern technologies including FastAPI, LangGraph, Next.js, and integrated with both OpenAI and AWS Bedrock for optimal cost and performance.
+
+> 🎓 **Demo Mode Available!** Deploy and demonstrate without OpenAI API keys - perfect for fellowship applications and portfolio showcases. See **[DEMO-MODE.md](DEMO-MODE.md)** for details.
 
 ## Project Overview
 
@@ -28,6 +30,7 @@ Smart Finance AI demonstrates a production-ready architecture for handling diver
 - **LLM Providers**:
   - OpenAI (GPT-4 for response generation)
   - AWS Bedrock (Claude 3 Haiku for routing)
+  - Mock AI (Demo mode for cost-free deployment)
 
 ### Frontend
 - **Framework**: Next.js 14 with React 18
