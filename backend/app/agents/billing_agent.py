@@ -2,7 +2,11 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import HumanMessage, SystemMessage
 from typing import Dict, List, Optional
-from ..services.vector_store import vector_store
+# Vector store is optional - only available when OpenAI key is provided
+try:
+    from ..services.vector_store import vector_store
+except Exception:
+    vector_store = None
 
 
 class BillingAgent:
@@ -14,7 +18,12 @@ class BillingAgent:
     """
     
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3, timeout=30, request_timeout=30)
+        import os
+        # Only initialize LLM if OpenAI key is available
+        if os.getenv("OPENAI_API_KEY"):
+            self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3, timeout=30, request_timeout=30)
+        else:
+            self.llm = None
         self.collection_name = "billing_documents"
         self.session_cache: Dict[str, List[str]] = {}
         
@@ -68,6 +77,9 @@ class BillingAgent:
     
     def process_query(self, query: str, session_id: str, user_context: str = None) -> str:
         """Process billing query using Hybrid RAG/CAG strategy"""
+        
+        if not self.llm:
+            return "I apologize, but the AI service is not available at the moment. Please try again later or contact support."
         
         try:
             # Simplified: Just answer the question directly without complex context

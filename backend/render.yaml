@@ -1,25 +1,15 @@
 services:
   - type: web
-    name: smartfinance-ai-backend
+    name: smartfinance-backend
     env: python
     region: oregon
     plan: free
-    branch: main
-    buildCommand: "./build.sh"
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt && python ingest_data.py"
     startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.0
-      - key: OPENAI_API_KEY
-        sync: false
-      - key: AWS_ACCESS_KEY_ID
-        sync: false
-      - key: AWS_SECRET_ACCESS_KEY
-        sync: false
-      - key: AWS_DEFAULT_REGION
-        sync: false
+      - key: USE_MOCK_AI
+        value: true
       - key: ENVIRONMENT
         value: production
-    healthCheckPath: /health
-    autoDeploy: true
-
+      - key: PYTHON_VERSION
+        value: 3.11.9

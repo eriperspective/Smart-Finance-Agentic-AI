@@ -1,9 +1,15 @@
 import chromadb
 from chromadb.config import Settings
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
 from typing import List, Dict, Optional
 import os
+
+# Only import OpenAI if available
+try:
+    from langchain_openai import OpenAIEmbeddings
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
 
 
 class VectorStoreService:
@@ -11,6 +17,8 @@ class VectorStoreService:
     
     def __init__(self, persist_directory: str = "./chroma_db"):
         self.persist_directory = persist_directory
+        if not OPENAI_AVAILABLE or not os.getenv("OPENAI_API_KEY"):
+            raise ValueError("OpenAI API key not available - vector store requires OpenAI")
         self.embeddings = OpenAIEmbeddings()
         self.client = chromadb.PersistentClient(path=persist_directory)
         
@@ -50,8 +58,14 @@ class VectorStoreService:
         collection.add_texts(texts=texts, metadatas=metadatas)
 
 
-# Global instance
-vector_store = VectorStoreService(
-    persist_directory=os.getenv("CHROMA_DB_PATH", "./chroma_db")
-)
+# Global instance - only create if OpenAI is available
+vector_store = None
+if OPENAI_AVAILABLE and os.getenv("OPENAI_API_KEY"):
+    try:
+        vector_store = VectorStoreService(
+            persist_directory=os.getenv("CHROMA_DB_PATH", "./chroma_db")
+        )
+    except Exception as e:
+        print(f"⚠️  Vector store initialization failed: {e}")
+        print("⚠️  Running without vector store (mock AI mode)")
 

@@ -14,7 +14,12 @@ class PolicyComplianceAgent:
     """
     
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.1, timeout=30, request_timeout=30)
+        import os
+        # Only initialize LLM if OpenAI key is available
+        if os.getenv("OPENAI_API_KEY"):
+            self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.1, timeout=30, request_timeout=30)
+        else:
+            self.llm = None
         
         self.system_prompt = """You are a comprehensive financial advisor and AI assistant for SmartFinance AI.
         
@@ -330,6 +335,9 @@ Arbitration required for disputes exceeding $10,000.
     
     def process_query(self, query: str, user_context: str = None) -> str:
         """Process policy query using Pure CAG strategy"""
+        
+        if not self.llm:
+            return "I apologize, but the AI service is not available at the moment. Please try again later or contact support."
         
         # Use provided user context or generic approach
         if not user_context:

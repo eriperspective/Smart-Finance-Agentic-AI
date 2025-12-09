@@ -1,7 +1,11 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import HumanMessage, SystemMessage
-from ..services.vector_store import vector_store
+# Vector store is optional - only available when OpenAI key is provided
+try:
+    from ..services.vector_store import vector_store
+except Exception:
+    vector_store = None
 
 
 class TechnicalSupportAgent:
@@ -13,7 +17,12 @@ class TechnicalSupportAgent:
     """
     
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.2, timeout=30, request_timeout=30)
+        import os
+        # Only initialize LLM if OpenAI key is available
+        if os.getenv("OPENAI_API_KEY"):
+            self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.2, timeout=30, request_timeout=30)
+        else:
+            self.llm = None
         self.collection_name = "technical_documents"
         
         self.system_prompt = """You are a technical support specialist and app features expert for SmartFinance AI's 
@@ -103,6 +112,9 @@ class TechnicalSupportAgent:
     def process_query(self, query: str, user_context: str = None) -> str:
         """Process technical support query using Pure RAG strategy"""
         
+        if not self.llm:
+            return "I apologize, but the AI service is not available at the moment. Please try again later or contact support."
+        
         # Use provided user context or generic approach
         if not user_context:
             user_context = """
@@ -119,13 +131,17 @@ GENERAL USER APP STATUS:
 • All standard features enabled
 """
         
-        # Always retrieve fresh context from vector store
-        context_docs = vector_store.query_documents(
-            collection_name=self.collection_name,
-            query=query,
-            k=4  # Get more results for technical issues
-        )
-        context = "\n\n".join(context_docs)
+        # Retrieve context from vector store if available
+        context = ""
+        if vector_store:
+            context_docs = vector_store.query_documents(
+                collection_name=self.collection_name,
+                query=query,
+                k=4  # Get more results for technical issues
+            )
+            context = "\n\n".join(context_docs)
+        else:
+            context = "Technical documentation not available - providing general guidance."
         
         # Create prompt with context
         prompt = ChatPromptTemplate.from_messages([
