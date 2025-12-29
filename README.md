@@ -2,7 +2,7 @@
 
 An Agentic AI and sophisticated customer service application powered by a multi-agent AI system designed for banking and FinTech use cases. Built with modern technologies including FastAPI, LangGraph, Next.js, and integrated with both OpenAI and AWS Bedrock for optimal cost and performance.
 
-> 🎓 **Demo Mode Available!** Deploy and demonstrate without OpenAI API keys - perfect for fellowship applications and portfolio showcases. See **[DEMO-MODE.md](DEMO-MODE.md)** for details.
+> 🎓 **Demo Mode Available!** Deploy and demonstrate without OpenAI API keys - perfect for fellowship applications and portfolio showcases. See **https://smart-finance-agentic-ai.vercel.app/login** for details.
 
 ## Project Overview
 
