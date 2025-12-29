@@ -718,14 +718,6 @@ The application implements **WAI-ARIA 1.2 (Web Accessibility Initiative - Access
 
 Smart Finance AI is committed to ensuring digital accessibility for all users, including those with disabilities. We continually improve the user experience and apply relevant accessibility standards.
 
-### Contact
-
-For accessibility-related questions, issues, or feedback, please contact:
-
-- **Email**: accessibility@smartfinance.ai (example)
-- **Issue Tracker**: [GitHub Issues](https://github.com/your-repo/issues)
-- **Response Time**: Within 48 hours
-
 ### Third-Party Content
 
 While we strive for full accessibility, some third-party integrations (OpenAI API responses) may not be under our direct control. We work with vendors to ensure compliance.
